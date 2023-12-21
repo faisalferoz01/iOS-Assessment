@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     // MARK: - IBOutlets
     @IBOutlet weak var photosCollectionView: UICollectionView!
     @IBOutlet weak var addButton: UIButton!
+    var activityIndicator: UIActivityIndicatorView!
 
     // MARK: - Properties
     var imageArray = [UIImage]()
@@ -20,6 +21,7 @@ class ViewController: UIViewController {
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupActivityIndicator()
         loadImagesFromDocumentsDirectory()
     }
 
@@ -84,4 +86,13 @@ class ViewController: UIViewController {
         alert.addAction(UIAlertAction(title: StringConstants.ViewController.OK, style: .default, handler: nil))
         present(alert, animated: true)
     }
+    /// Show the activityIndicator
+    private func setupActivityIndicator() {
+        activityIndicator = UIActivityIndicatorView(style: .medium)
+        activityIndicator.color = .red
+        activityIndicator.center = view.center
+        activityIndicator.hidesWhenStopped = true
+        view.addSubview(activityIndicator)
+    }
+
 }

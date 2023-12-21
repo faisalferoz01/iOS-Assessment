@@ -12,7 +12,7 @@ struct StringConstants {
     struct ViewController {
       
         static var AlertControllerTitle = "Choose Image Source"
-        static var AlertControllerMessage = "2"
+        static var AlertControllerMessage = "Select the source from which you want to add images"
         static var TakePhoto = "Take Photo"
         static var ChoosePhoto = "Choose from Library"
         static var Cancel = "Cancel"
@@ -21,8 +21,5 @@ struct StringConstants {
         static var OK = "OK"
         static var PhotoCell = "PhotoCell"
         static var Images = "Images"
-        static var ImageTwo = "2"
-        static var ImageThree = "3"
-        static var Next = "Next"
     }
 }

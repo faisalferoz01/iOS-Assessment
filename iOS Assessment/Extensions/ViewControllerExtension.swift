@@ -73,16 +73,26 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
 extension ViewController: PHPickerViewControllerDelegate {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         dismiss(animated: true)
+        activityIndicator.startAnimating()
+
+        let dispatchGroup = DispatchGroup()
+
         for result in results {
+            dispatchGroup.enter()
             result.itemProvider.loadObject(ofClass: UIImage.self) { object, error in
+                defer {
+                    dispatchGroup.leave()
+                }
                 if let image = object as? UIImage {
                     self.imageArray.append(image)
                     self.saveImagesToDocumentsDirectory()
                 }
-                DispatchQueue.main.async {
-                    self.photosCollectionView.reloadData()
-                }
             }
+        }
+
+        dispatchGroup.notify(queue: .main) {
+            self.activityIndicator.stopAnimating()
+            self.photosCollectionView.reloadData()
         }
     }
 }
